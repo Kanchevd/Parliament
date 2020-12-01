@@ -9,9 +9,9 @@ from itemadapter import ItemAdapter
 import sqlite3
 
 class UnwrapPipeline:
-    def process_item(self, item, spider):
+    def process_item(self, item, spider):   
         #ItemLoader gets all items as lists; set the property to the first value to remove them from the lists
-
+        
         item['name'] = item.get('name')[0].strip()
         item['dob'] = item.get('dob')[0].strip()
         item['pob'] = item.get('pob')[0].strip()
@@ -25,6 +25,7 @@ class UnwrapPipeline:
 class PrintPipeline:
     def process_item(self, item, spider):
         #Prints all items; For testing purposes
+
         print(item.get('name'))
         print(item.get('dob'))
         print(item.get('pob'))
@@ -32,13 +33,13 @@ class PrintPipeline:
         print(item.get('lang'))
         print(item.get('pp'))
         print(item.get('email'))
-       
         return item
 
 class ParsePipeline:
     def process_item(self, item, spider):
-        item['dob'] = item.get('dob').replace('/','')
-
+        #Variable parsing in this pipeline
+        
+        item['dob'] = item.get('dob').replace('/','') #remove slashes so DOB can be searched via API
         return item
 
 class DatabasePipeline:
@@ -53,7 +54,7 @@ class DatabasePipeline:
     def process_item(self, item, spider):
         #Insert values
         self.c.execute("INSERT INTO mps (name,dob,pob,job,lang,pp,email) VALUES (?,?,?,?,?,?,?)",(item.get('name'),item.get('dob'),item.get('pob'), item.get('job'), item.get('lang'), item.get('pp'),item.get('email')))
-        self.conn.commit()
+        self.conn.commit() #commit after every entry
         return item
 
     def close_spider(self, spider):

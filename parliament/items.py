@@ -1,18 +1,11 @@
-# Define here the models for your scraped items
-#
-# See documentation in:
-# https://docs.scrapy.org/en/latest/topics/items.html
-
 import scrapy
 
 
 class MP(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    name = scrapy.Field()
-    dob = scrapy.Field()
-    pob = scrapy.Field()
-    job = scrapy.Field()
-    lang = scrapy.Field()
-    pp = scrapy.Field()
-    email = scrapy.Field()
+    name = scrapy.Field() 
+    dob = scrapy.Field() #Date of Birth
+    pob = scrapy.Field() #Place of Birth
+    job = scrapy.Field() #Profession
+    lang = scrapy.Field() #All spoken languages
+    pp = scrapy.Field() #Political Party
+    email = scrapy.Field() 
